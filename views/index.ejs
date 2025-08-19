@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/notes.css" />
+    <style></style>
+  </head>
+  <body>
+    <header class="header">
+      <h1><%= title %></h1>
+    </header>
+
+    <main class="container">
+      <!-- Search Form -->
+      <form id="searchForm">
+        <input type="text" id="searchQuery" placeholder="Search notes..." />
+        <button type="submit">Search</button>
+      </form>
+
+      <!-- Add / Update Note Form -->
+      <form id="noteForm">
+        <input type="hidden" id="noteId" />
+        <input type="text" id="title" placeholder="Note title" required />
+        <textarea id="content" placeholder="Note content" required></textarea>
+        <button type="submit">Save Note</button>
+      </form>
+
+      <!-- Notes List -->
+      <div id="notesList">
+        <% noteData.forEach(note => { %>
+        <div class="note-card" data-id="<%= note._id %>">
+          <h2 class="note-title"><%= note.title %></h2>
+          <textarea class="note-content" readonly><%= note.content %></textarea>
+          <span class="note-date">
+            <%= new Date(note.creationDate).toLocaleDateString() %>
+          </span>
+          <div class="note-actions">
+            <button class="editBtn">Edit</button>
+            <button class="deleteBtn">Delete</button>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+
+      <!-- Pagination -->
+      <div id="pagination" style="margin-top: 1rem"></div>
+    </main>
+  </body>
+</html>

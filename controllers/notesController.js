@@ -63,7 +63,6 @@ export const updateNote = async (req, res) => {
   try {
     const { id } = req.params;
     const { title, content } = req.body;
-
     const updatedNote = await Notes.findByIdAndUpdate(
       id,
       {

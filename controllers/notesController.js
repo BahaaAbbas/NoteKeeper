@@ -32,6 +32,17 @@ export const getNotes = async (req, res) => {
   }
 };
 
+export const getAllNotes = async (req, res) => {
+  try {
+    const notes = await Notes.find().sort({ creationDate: -1 }); // fetch all notes, newest first
+    res.json(notes); // return just the array
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to fetch notes", error: error.message });
+  }
+};
+
 export const createNote = async (req, res) => {
   try {
     const { title, content } = req.body;
